@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>..: Usuário :..</title>
+</h:head>
+<h:body>
+	<h1>Usuários</h1>
+	<h:form id="frmListaUsuarios">
+		<p:messages />
+
+		<p:dataTable value="#{usuarioBean.lista}" var="usuario" rules="rows"
+			cellpadding="5">
+			<f:facet name="caption">
+				A listagem a seguir exibe a relação de todos os usuários do sistema. Você poderá realizar ativação e desativação, edição e exclusão para os usuários.
+			</f:facet>
+			<f:facet name="header">Listagem de Usuários</f:facet>
+			<f:facet name="footer">Final de listagem</f:facet>
+			<p:column>
+				<f:facet name="header">Código</f:facet>
+				<p:outputLabel value="#{usuario.pk}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Departamento</f:facet>
+				<p:outputLabel value="#{usuario.departamento.nome}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Nome</f:facet>
+				<p:outputLabel value="#{usuario.nome}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Cargo</f:facet>
+				<p:outputLabel value="#{usuario.cargo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Tipo</f:facet>
+				<p:outputLabel value="#{usuario.tipo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Login</f:facet>
+				<p:outputLabel value="#{usuario.login}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">E-mail</f:facet>
+				<p:outputLabel value="#{usuario.email}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Situação</f:facet>
+				<p:selectBooleanButton onLabel="Ativo" offLabel="Inativo"	value="#{usuario.situacao}" disabled="true" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Funções</f:facet>
+				<p:commandButton action="#{usuarioBean.editar()}" value="Alterar">
+					<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}" />
+					<f:setPropertyActionListener target="#{usuarioBean.destinoSalvar}" value="usuarioLista"/>
+				</p:commandButton>
+
+				<p:commandButton value="Excluir" action="#{usuarioBean.excluir()}" onclick="if(!confirm('Confirma a exclusão do usuário #{usuario.nome}?'))return false;">
+					<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<br />
+		<br />
+		<p:separator />
+		<p:commandButton action="#{usuarioBean.novo()}" value="Cadastrar" />
+	</h:form>
+</h:body>
+</html>

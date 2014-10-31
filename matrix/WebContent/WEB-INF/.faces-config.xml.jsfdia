@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="index::#index.jsf" NAME="output"
+    PATH="/index.jsf" TARGET="rules:#index.jsf" TITLE="index" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="usuarioLista::#modulos#usuario#lista.jsf"
+    NAME="output2" PATH="/modulos/usuario/lista.jsf"
+    TARGET="rules:#modulos#usuario#lista.jsf" TITLE="usuarioLista" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="usuarioCadastro::#modulos#usuario#cadastro.jsf" NAME="output3"
+    PATH="/modulos/usuario/cadastro.jsf"
+    TARGET="rules:#modulos#usuario#cadastro.jsf" TITLE="usuarioCadastro" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modulos#usuario#cadastro.jsf"
+  PATH="/modulos/usuario/cadastro.jsf" SHAPE="288,801,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#index.jsf" PATH="/index.jsf"
+  SHAPE="288,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modulos#usuario#lista.jsf"
+  PATH="/modulos/usuario/lista.jsf" SHAPE="288,689,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

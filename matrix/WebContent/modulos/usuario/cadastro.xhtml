@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>..: Usuário :..</title>
+</h:head>
+<h:body>
+
+	<h1>Usuários</h1>
+	<h:form id="frmCadastroUsuario">
+		<p:messages closable="true" />
+		<h:inputHidden value="#{usuarioBean.usuario.pk}" />
+		<h:inputHidden value="#{usuarioBean.destinoSalvar}" />
+
+		<h:panelGrid columns="2">
+
+			<p:outputLabel value="Código:" for="codigo" />
+			<p:inputText id="codigo" label="Código"
+				value="#{usuarioBean.usuario.pk}" disabled="true" />
+
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" label="Nome"
+				value="#{usuarioBean.usuario.nome}" size="50" maxlength="50"
+				required="true" requiredMessage="Informe o nome do usuário"
+				validatorMessage="O nome do usuário deve ter entre 10 e 50 caracteres.">
+				<f:validateLength minimum="10" maximum="50" />
+			</p:inputText>
+
+			<p:outputLabel for="departamento" value="Departamentos:" />
+			<p:selectOneMenu converter="javax.faces.Integer" id="departamento" value="#{usuarioBean.usuario.departamento}" required="true" requiredMessage="Informe o departamento do usuário" effect="fold" filter="true" panelStyle="width:180px">
+				<f:selectItem itemLabel="- Departamento -" itemValue="" />
+				<f:selectItems value="#{usuarioBean.departamentos}" var="departamentos" itemLabel="#{departamentos.nome}" itemValue="#{departamentos.pk}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Cargo:" for="cargo" />
+			<p:inputText id="cargo" label="Cargo"
+				value="#{usuarioBean.usuario.cargo}" size="30" maxlength="30" />
+
+			<p:outputLabel for="tipo" value="Tipo:" />
+			<p:selectOneMenu id="tipo" value="#{usuarioBean.usuario.tipo}"
+				required="true" requiredMessage="Informe o tipo do usuário"
+				effect="fold" panelStyle="width:180px">
+				<f:selectItems value="#{usuarioBean.tipos}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Login:" for="login" />
+			<p:inputText id="login" label="Login"
+				value="#{usuarioBean.usuario.login}" size="10" maxlength="10"
+				required="true"
+				validatorMessage="Login deve ter no mínimo 5 e no máximo 10 caracteres e só pode ter os símbolos '.' e '_'">
+				<f:validateRegex pattern="([a-z]|[0-9]|[.]|[_]){5,10}" />
+			</p:inputText>
+
+			<p:outputLabel value="Senha:" for="senha" />
+			<p:password required="true"
+				requiredMessage="Informe a senha do usuário" id="senha"
+				value="#{usuarioBean.usuario.senha}" feedback="true"
+				promptLabel="Força da senha" weakLabel="Frágil" goodLabel="Adequado"
+				strongLabel="Forte" match="confirmaSenha" label="Senha"
+				validatorMessage="Senha informada, não confere." />
+
+			<p:outputLabel value="Confirma Senha:" for="confirmaSenha" />
+			<p:password required="true"
+				requiredMessage="Confirme a senha informada" id="confirmaSenha"
+				value="#{usuarioBean.usuario.senha}" label="Confirme a Senha" />
+
+			<p:outputLabel value="E-mail:" for="email" />
+			<p:inputText id="email" label="E-mail"
+				value="#{usuarioBean.usuario.email}" size="50" maxlength="50"
+				required="true"
+				validatorMessage="E-mail informado do usuário esta invalido.">
+				<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+			</p:inputText>
+
+			<p:outputLabel value="Situação:" for="situacao" />
+			<p:selectBooleanButton id="situacao"
+				value="#{usuarioBean.usuario.situacao}" onLabel="Ativo"
+				offLabel="Inativo" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+
+			<br />
+			<br />
+
+			<p:outputLabel />
+
+			<p:commandButton action="#{usuarioBean.salvar()}" value="Salvar"
+				ajax="false" />
+		</h:panelGrid>
+	</h:form>
+	<p:separator />
+	<h:form>
+		<p:commandButton action="lista" value="Cancelar" />
+	</h:form>
+</h:body>
+</html>
