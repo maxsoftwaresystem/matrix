@@ -1,5 +1,7 @@
 package matrix.usuario;
 
+//Projeto sincronizado via GitHub
+
 import java.io.Serializable;
 import java.util.Date;
 
